@@ -131,10 +131,23 @@ const listByCustomer = (data, callBack) => {
     })
   }
 
+const listBySystem = (callBack) => {
+    pool.query(
+        'SELECT tags.systems.id, tags.tags.name, tags.tag_values.value  FROM tags.tag_values INNER JOIN tags.tags ON tags.tag_values.tag_id=tags.tags.id INNER JOIN tags.systems ON tags.tags.system_id=tags.systems.id',
+        (error, results, fields) => {
+          if (error) {
+            callBack(error);
+          }
+          callBack(null, results);
+        }
+      );
+}
+
 module.exports = {
     create,
     list,
     createValue,
     getLastTagValueById,
     listByCustomer,
+    listBySystem
 };

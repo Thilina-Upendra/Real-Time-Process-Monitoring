@@ -8,6 +8,7 @@ const {
     createValue,
     getLastTagValueById,
     listByCustomer,
+    listBySystem,
 } = require("./tag.service");
 
 /**
@@ -133,17 +134,28 @@ const listTagsByCustomer = (req, res) => {
     const data = {
         apiKey,
     };
-    listByCustomer(data, (err, results) => {
+    listBySystem((err, results) => {
         if (err) {
             return res.status(500).json({
             success: 0,
             message: "Database connection errror"
             });
         }
-        return res.status(200).json({
-            success: 1,
-            data: results
-        });
+        let finalizedData = []
+        for(i = 0; i < results.length; i++) {
+            const reqSystemData = results.filter(result => result.id = results[i]);
+            const reqTagNames = reqSystemData.filter(sys => sys.name);
+            const reqTagValues = reqSystemData.filter(sys => sys.value);
+            let finalData = {}
+            finalData['batchId'] = results[i].id
+            reqTagNames.forEach((name, m) => {
+                finalData[name] = reqTagValues[m]
+            })
+            finalizedData.push(finalData)
+            i = i + reqSystemData.length
+        }
+        console.log(JSON.parse(JSON.stringify(finalizedData)));
+        return res.status(200).json(finali);
     });
 }
 

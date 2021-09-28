@@ -143,19 +143,22 @@ const listTagsByCustomer = (req, res) => {
         }
         let finalizedData = []
         for(i = 0; i < results.length; i++) {
-            const reqSystemData = results.filter(result => result.id = results[i]);
-            const reqTagNames = reqSystemData.filter(sys => sys.name);
-            const reqTagValues = reqSystemData.filter(sys => sys.value);
+            const reqSystemData = results.filter(result => result.id == results[i].id);
+            console.log(reqSystemData.length)
+            const reqTagNames = reqSystemData.filter(sys => { return sys.name});
+            const reqTagValues = reqSystemData.filter(sys => { return sys.value});
             let finalData = {}
-            finalData['batchId'] = results[i].id
             reqTagNames.forEach((name, m) => {
-                finalData[name] = reqTagValues[m]
+                finalData[name.name] = reqTagValues[m].value
             })
-            finalizedData.push(finalData)
-            i = i + reqSystemData.length
+            finalizedData.push(finalData);
+            i = i + reqSystemData.length;
         }
-        console.log(JSON.parse(JSON.stringify(finalizedData)));
-        return res.status(200).json(finali);
+        console.log(finalizedData);
+        return res.status(200).json({
+            success: 1,
+            data: finalizedData
+        });
     });
 }
 

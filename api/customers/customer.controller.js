@@ -28,6 +28,7 @@ const createCustomer = (req, res) => {
         email,
         telephone
     };
+    console.log(body);
     create(body, (err, results) => {
         if (err) {
             return res.status(500).json({

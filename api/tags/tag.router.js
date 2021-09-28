@@ -25,7 +25,7 @@ const {
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.post("/create", validate(createTagValidation, {}, {}), Auth.validateRerquest, createTag);
+router.post("/create", validate(createTagValidation, {}, {}), createTag);
 
 /**
  * This statement handles requests coming into /api/tag/create/value endpoint.
@@ -34,7 +34,7 @@ router.post("/create", validate(createTagValidation, {}, {}), Auth.validateRerqu
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.post("/create/value", validate(createTagValueValidation, {}, {}), Auth.validateRerquest, createTagValue);
+router.post("/create/value", validate(createTagValueValidation, {}, {}), createTagValue);
 
 /**
  * This statement handles requests coming into /api/tag/get/value endpoint.
@@ -43,7 +43,7 @@ router.post("/create/value", validate(createTagValueValidation, {}, {}), Auth.va
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.post("/get/value", validate(getLastTagValueValidation, {}, {}), Auth.validateRerquest,  getLastTagValue);
+router.post("/get/value", validate(getLastTagValueValidation, {}, {}),  getLastTagValue);
 
 /**
  * This statement handles requests coming into /api/list/by-customer endpoint.
@@ -52,6 +52,6 @@ router.post("/get/value", validate(getLastTagValueValidation, {}, {}), Auth.vali
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.get("/list/by-customer", validate(listTagsByCustomerValidation, {}, {}), Auth.validateRerquest, listTagsByCustomer);
+router.get("/list/by-customer", validate(listTagsByCustomerValidation, {}, {}), listTagsByCustomer);
 
 module.exports = router;

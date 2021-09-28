@@ -24,6 +24,7 @@ const create = (data, callBack) => {
     ],
     (error, results, fields) => {
       if (error) {
+        console.log(error);
         callBack(error);
       }
       callBack(null, results);

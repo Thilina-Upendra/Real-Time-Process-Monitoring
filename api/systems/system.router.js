@@ -22,7 +22,7 @@ const {
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.post("/create", validate(createSystemValidation, {}, {}), Auth.validateRerquest, createSystem);
+router.post("/create", validate(createSystemValidation, {}, {}), createSystem);
 
 /**
  * This statement handles requests coming into /api/system/list endpoint.
@@ -39,6 +39,6 @@ router.get("/list", listSystems);
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.get("/list/by-customer", validate(listSystemByCustomerValidation, {}, {}), Auth.validateRerquest, listSystemsByCustomer)
+router.get("/list/by-customer", validate(listSystemByCustomerValidation, {}, {}), listSystemsByCustomer)
 
 module.exports = router;

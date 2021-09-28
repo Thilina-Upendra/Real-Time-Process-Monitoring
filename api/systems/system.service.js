@@ -25,6 +25,7 @@ const create = (data, callBack) => {
       callBack(err);
     }
     let user = results[0];
+    console.log(user);
     pool.query(
       `insert into systems(customer_id, name, description) values(?,?,?)`,
       [
@@ -34,8 +35,10 @@ const create = (data, callBack) => {
       ],
       (error, results, fields) => {
         if (error) {
+          
           callBack(error);
         }
+        
         callBack(null, results);
       }
     );

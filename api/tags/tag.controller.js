@@ -80,13 +80,11 @@ const createMultipleTag = (req, res) => {
  * - res.message - Error message, if the operation is failed.
  */
 const createTagValue = (req, res) => {
-    const tagId = req.query.tagId;
-    const value = req.query.value;
-    const currentTime = new Date();
+    const ids = req.query.tagIds.split(',');
+    const values = req.query.values.split(',');
     const data = {
-        tagId,
-        value,
-        currentTime,
+        ids,
+        values,
     };
     createValue(data, (err, results) => {
         if (err) {

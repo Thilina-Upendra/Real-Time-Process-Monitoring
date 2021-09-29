@@ -103,12 +103,17 @@ const list = (callBack) => {
  * @param {function} callBack Call back function to return data
  */
 const createValue = (data, callBack) => {
+    const ids = data.ids;
+    const values = data.values;
+    let times = [];
+    ids.forEach(element => {
+        times.push(new Date());
+    });
+    let dataSet = _.zip(ids, values, times);
     pool.query(
-        'insert into tag_values(tag_id, value, created_at) values(?,?,?)',
+        'insert into tag_values(tag_id, value, created_at) values ?',
         [
-            data.tagId,
-            data.value,
-            data.currentTime,
+            dataSet
         ],
         (error, results, fields) => {
             if(error){

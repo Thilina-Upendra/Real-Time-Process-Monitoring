@@ -16,6 +16,7 @@ const {
     createTagValue,
     getLastTagValue,
     listTagsByCustomer,
+    createMultipleTag
  } = require("./tag.controller");
 
  /**
@@ -52,6 +53,8 @@ router.post("/get/value", validate(getLastTagValueValidation, {}, {}),  getLastT
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.get("/list/by-customer", validate(listTagsByCustomerValidation, {}, {}), listTagsByCustomer);
+router.get("/list/by-customer", listTagsByCustomer);
+
+router.post("/create/multiple", createMultipleTag);
 
 module.exports = router;

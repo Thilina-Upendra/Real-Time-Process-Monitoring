@@ -22,7 +22,7 @@ const {
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.post("/create", validate(createSystemValidation, {}, {}), createSystem);
+router.post("/create", createSystem);
 
 /**
  * This statement handles requests coming into /api/system/list endpoint.

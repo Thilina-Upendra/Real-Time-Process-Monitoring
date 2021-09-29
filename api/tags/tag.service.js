@@ -6,7 +6,11 @@
 const pool = require('../../config/database');
 const {
     getByApiKey
-} = require('../customers/customer.service'); 
+} = require('../customers/customer.service');
+const {
+    TAG_NAMES
+} = require('../../consts')
+var _ = require('underscore');
 
 /**
  * This function performs Tag save functionalities.
@@ -33,6 +37,41 @@ const create = (data, callBack) => {
                 callBack(error);
             }
             callBack(null, results);
+        },
+    );
+}
+
+const createMultipleTags = (data, callBack) => {
+    const names = TAG_NAMES;
+    let descriptions = [];
+    let systemIds = [];
+    let createdAtValues = [];
+    names.forEach(element => {
+        descriptions.push('Description');
+        systemIds.push(data.systemId);
+        createdAtValues.push(new Date());
+    });
+    let dataSet = _.zip(systemIds, names, descriptions, createdAtValues);
+    pool.query(
+        'insert into tags(system_id, name, description, created_at) values ?',
+        [
+            dataSet
+        ],
+        (error, results, fields) => {
+            if(error){
+                console.log(error);
+                callBack(error);
+            }
+            pool.query(
+                `select * from tags where system_id=?`,
+                [data.systemId],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+                    callBack(null, results);
+                }
+            );
         },
     );
 }
@@ -149,5 +188,6 @@ module.exports = {
     createValue,
     getLastTagValueById,
     listByCustomer,
-    listBySystem
+    listBySystem,
+    createMultipleTags
 };

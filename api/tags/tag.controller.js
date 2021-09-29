@@ -9,6 +9,7 @@ const {
     getLastTagValueById,
     listByCustomer,
     listBySystem,
+    createMultipleTags
 } = require("./tag.service");
 
 /**
@@ -35,6 +36,25 @@ const createTag = (req, res) => {
         currentTime,
     };
     create(data, (err, results) => {
+        if (err) {
+            return res.status(500).json({
+            success: 0,
+            message: "Database connection errror"
+            });
+        }
+        return res.status(200).json({
+            success: 1,
+            data: results
+        });
+    });
+}
+
+const createMultipleTag = (req, res) => {
+    const systemId = req.query.systemId;
+    const data = {
+        systemId
+    };
+    createMultipleTags(data, (err, results) => {
         if (err) {
             return res.status(500).json({
             success: 0,
@@ -144,7 +164,6 @@ const listTagsByCustomer = (req, res) => {
         let finalizedData = []
         for(i = 0; i < results.length; i++) {
             const reqSystemData = results.filter(result => result.id == results[i].id);
-            console.log(reqSystemData.length)
             const reqTagNames = reqSystemData.filter(sys => { return sys.name});
             const reqTagValues = reqSystemData.filter(sys => { return sys.value});
             let finalData = {}
@@ -154,7 +173,6 @@ const listTagsByCustomer = (req, res) => {
             finalizedData.push(finalData);
             i = i + reqSystemData.length;
         }
-        console.log(finalizedData);
         return res.status(200).json({
             success: 1,
             data: finalizedData
@@ -167,4 +185,5 @@ module.exports = {
     createTagValue,
     getLastTagValue,
     listTagsByCustomer,
+    createMultipleTag
 };

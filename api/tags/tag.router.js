@@ -35,7 +35,7 @@ router.post("/create", validate(createTagValidation, {}, {}), createTag);
  * @param {function} validatoin Validation function for the request
  * @param {function} controllerFunction Function of the controller where the request should be routed into.
  */
-router.post("/create/value", validate(createTagValueValidation, {}, {}), createTagValue);
+router.post("/create/value", createTagValue);
 
 /**
  * This statement handles requests coming into /api/tag/get/value endpoint.

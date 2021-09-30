@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "376b2f73-f8f7-4ca6-a38b-229bd4f930db",
+		"name": "Real time process monitoring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "createCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/customer/create?name=Upendra&email=upendra@gmail.com&telephone=0710159914",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"customer",
+								"create"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Upendra"
+								},
+								{
+									"key": "email",
+									"value": "upendra@gmail.com"
+								},
+								{
+									"key": "telephone",
+									"value": "0710159914"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ApiKey",
+			"item": [
+				{
+					"name": "createApiKey",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/key/create?email=upendra@gmail.com&assignedIp=123.23.12.21",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"key",
+								"create"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "upendra@gmail.com"
+								},
+								{
+									"key": "assignedIp",
+									"value": "123.23.12.21"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "createSystem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "11786c31-e84e-4010-9963-d3515aefb77a",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/system/create?name=Batch-8&description=Tes",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"system",
+								"create"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Batch-8"
+								},
+								{
+									"key": "description",
+									"value": "Tes"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "createTag",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "b3b9fdef-ffb2-4912-aad8-55d561a88e18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/tag/create?systemId=2&description=Fabric utilzation KPI&name=Laying SAM",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tag",
+								"create"
+							],
+							"query": [
+								{
+									"key": "systemId",
+									"value": "2"
+								},
+								{
+									"key": "description",
+									"value": "Fabric utilzation KPI"
+								},
+								{
+									"key": "name",
+									"value": "Laying SAM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createMultipleTags",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "b3b9fdef-ffb2-4912-aad8-55d561a88e18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/tag/create/multiple?systemId=8",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tag",
+								"create",
+								"multiple"
+							],
+							"query": [
+								{
+									"key": "systemId",
+									"value": "8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TagValues",
+			"item": [
+				{
+					"name": "createTagValues",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "b3b9fdef-ffb2-4912-aad8-55d561a88e18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/tag/create/value?tagIds=77,78,79,80,81,82,83,84,85,86,87,88,89,90&values=10,20,30,15,25,24,15,41,25,36,56,56,54,12",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tag",
+								"create",
+								"value"
+							],
+							"query": [
+								{
+									"key": "tagIds",
+									"value": "77,78,79,80,81,82,83,84,85,86,87,88,89,90"
+								},
+								{
+									"key": "values",
+									"value": "10,20,30,15,25,24,15,41,25,36,56,56,54,12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllTagValues",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "b3b9fdef-ffb2-4912-aad8-55d561a88e18",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/tag/list/by-customer",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"tag",
+								"list",
+								"by-customer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

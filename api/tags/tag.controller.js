@@ -168,12 +168,16 @@ const listTagsByCustomer = (req, res) => {
             const reqTagValues = reqSystemData.filter(sys => { return sys.value});
             let finalData = {}
             reqTagNames.forEach((name, m) => {
-                finalData[name.name] = reqTagValues[m].value
+                if(reqTagValues[m]) {
+                    finalData[name.name] = reqTagValues[m].value;
+                } else {
+                    finalData[name.name] = null;
+                }
             })
             finalizedData.push(finalData);
             i = i + reqSystemData.length;
         }
-        console.log(finalizedData);
+        // console.log(finalizedData);
         return res.status(200).json({
             success: 1,
             data: finalizedData
